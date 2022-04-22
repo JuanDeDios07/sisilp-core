@@ -1,9 +1,6 @@
 package edu.ilp.sysgailp.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -15,28 +12,40 @@ public class Estudiante extends Persona {
     @Column(name = "serie",length = 100,nullable = false)
     private  String serie;
 
-    public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero, Long codigo, String serie) {
-        super(nombre, apellido, edad, dni, fechaNacimiento, genero);
-        this.codigo = codigo;
-        this.serie = serie;
-    }
-
-    public Estudiante(Long codigo, String serie) {
-        this.codigo = codigo;
-        this.serie = serie;
-    }
-
-    public Estudiante(Long idpersona, Long codigo, String serie) {
-        super(idpersona);
-        this.codigo = codigo;
-        this.serie = serie;
-    }
+    @ManyToOne
+    @JoinColumn(name = "idpersona")
+    private Escuela escuela;
 
     public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero) {
         super(nombre, apellido, edad, dni, fechaNacimiento, genero);
     }
 
-    public Estudiante() {
+    public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero, Long codigo, String serie, Escuela escuela) {
+        super(nombre, apellido, edad, dni, fechaNacimiento, genero);
+        this.codigo = codigo;
+        this.serie = serie;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(Long codigo, String serie, Escuela escuela) {
+        this.codigo = codigo;
+        this.serie = serie;
+        this.escuela = escuela;
+    }
+
+    public Estudiante(Long idpersona, Long codigo, String serie, Escuela escuela) {
+        super(idpersona);
+        this.codigo = codigo;
+        this.serie = serie;
+        this.escuela = escuela;
+    }
+
+    public Escuela getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(Escuela escuela) {
+        this.escuela = escuela;
     }
 
     public Estudiante(Long idpersona) {

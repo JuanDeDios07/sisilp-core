@@ -12,12 +12,17 @@ public class Estudiante extends Persona {
     @Column(name = "serie",length = 100,nullable = false)
     private  String serie;
 
-    @ManyToOne
-    @JoinColumn(name = "idpersona")
+   @ManyToOne(optional = false, cascade = CascadeType.ALL,fetch = FetchType.LAZY)
+    //@JoinColumn(name = "IDPERSONA")
     private Escuela escuela;
 
     public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero) {
         super(nombre, apellido, edad, dni, fechaNacimiento, genero);
+    }
+
+    public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero, Long codigo) {
+        super(nombre, apellido, edad, dni, fechaNacimiento, genero);
+        this.codigo = codigo;
     }
 
     public Estudiante(String nombre, String apellido, int edad, String dni, Date fechaNacimiento, String genero, Long codigo, String serie, Escuela escuela) {
@@ -48,10 +53,6 @@ public class Estudiante extends Persona {
         this.escuela = escuela;
     }
 
-    public Estudiante(Long idpersona) {
-        super(idpersona);
-    }
-
     public Long getCodigo() {
         return codigo;
     }
@@ -67,4 +68,6 @@ public class Estudiante extends Persona {
     public void setSerie(String serie) {
         this.serie = serie;
     }
+
+
 }

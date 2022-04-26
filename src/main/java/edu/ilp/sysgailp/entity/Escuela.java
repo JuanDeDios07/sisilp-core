@@ -1,30 +1,23 @@
 package edu.ilp.sysgailp.entity;
 
 import javax.persistence.*;
-
+import java.util.List;
 
 @Entity
 @Table(name = "escuela")
 public class Escuela {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idescuela;
-
+    private  Long idescuela;
+    @Column(name = "denominacion",length =50 )
     private String denominacion;
-    private String codigoescuela;
+    @Column(name = "codigo_escuela",length =10 )
+    private String codigoEscuela;
 
-    public Escuela(Long idescuela, String denominacion, String codigoescuela) {
-        this.idescuela = idescuela;
-        this.denominacion = denominacion;
-        this.codigoescuela = codigoescuela;
-    }
+    @OneToMany(mappedBy = "escuela")
+    private List<Estudiante> estudiantes;
 
-    public Escuela() {
-    }
-
-    public Escuela(Long idescuela) {
-        this.idescuela = idescuela;
-    }
 
     public Long getIdescuela() {
         return idescuela;
@@ -42,11 +35,24 @@ public class Escuela {
         this.denominacion = denominacion;
     }
 
-    public String getCodigoescuela() {
-        return codigoescuela;
+    public String getCodigoEscuela() {
+        return codigoEscuela;
     }
 
-    public void setCodigoescuela(String codigoescuela) {
-        this.codigoescuela = codigoescuela;
+    public void setCodigoEscuela(String codigoEscuela) {
+        this.codigoEscuela = codigoEscuela;
+    }
+
+    public Escuela() {
+    }
+
+    public Escuela(Long idescuela) {
+        this.idescuela = idescuela;
+    }
+
+    public Escuela(Long idescuela, String denominacion, String codigoEscuela) {
+        this.idescuela = idescuela;
+        this.denominacion = denominacion;
+        this.codigoEscuela = codigoEscuela;
     }
 }

@@ -7,6 +7,7 @@ import java.util.Date;
 @Table(name = "estudiante")
 @PrimaryKeyJoinColumn(referencedColumnName = "idpersona")
 public class Estudiante extends Persona {
+
     @Column(name = "codigo",length = 10,nullable = false)
     private Long codigo;
     @Column(name = "serie",length = 100,nullable = false)
